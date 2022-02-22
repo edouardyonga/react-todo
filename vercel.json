@@ -1,6 +1,6 @@
 {
     "headers": [{
-        "source": "/api/(.*)",
+        "source": "http://jsonplaceholder.typicode.com/todos/(.*)",
         "headers": [
             { "key": "Access-Control-Allow-Credentials", "value": "true" },
             { "key": "Access-Control-Allow-Origin", "value": "*" },
