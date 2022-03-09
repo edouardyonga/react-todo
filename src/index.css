@@ -93,6 +93,7 @@ body {
 
 .task .btn--delete {
     margin-left: auto;
+    flex-shrink: 0;
 }
 
 .task.reminder {
@@ -111,7 +112,6 @@ body {
 
 .btn {
     display: inline-block;
-    background: #000;
     color: #fff;
     border: none;
     padding: 10px 20px;
@@ -121,6 +121,16 @@ body {
     text-decoration: none;
     font-size: 13px;
     font-family: inherit;
+}
+
+.btn--in {
+    background: #fff;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+}
+
+.btn--out {
+    background: green !important;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
 .btn--clear {
@@ -137,6 +147,7 @@ body {
 }
 
 .btn--delete {
+    font-size: 1.5rem;
     width: 20px;
     height: 20px;
     color: red;

@@ -9,7 +9,7 @@ const AddTask = ({ addTask }) => {
       setText(e.target.value);
       setValid(true);
     } else {
-      setText('');
+      setText("");
       setValid(false);
     }
   };
@@ -21,7 +21,7 @@ const AddTask = ({ addTask }) => {
       alert("Please add a task");
       return;
     }
-    addTask({ title:text, completed:false});
+    addTask({ title: text, completed: false });
     setText("");
     setValid(false);
   };
@@ -36,8 +36,7 @@ const AddTask = ({ addTask }) => {
       />
       <button
         type="submit"
-        style={{ backgroundColor: `${valid?'green':'grey'}` }}
-        className="btn"
+        className={`btn ${valid ? "btn--out" : "btn--in"}`}
         disabled={!valid}
       >
         Add

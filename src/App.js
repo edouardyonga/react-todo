@@ -1,5 +1,3 @@
-import { BrowserRouter as Router } from "react-router-dom";
-
 import Tasks from "./components/Tasks";
 import { useState, useEffect } from "react";
 import AddTask from "./components/AddTask";
@@ -29,12 +27,13 @@ function App() {
     const data = await res.json();
     return data;
   };
+
   // Add task
   const addTask = async (task) => {
     console.log(task);
 
-    const id = Math.floor(Math.random()*10000)
-    const newTask = {id, ...task}
+    const id = Math.floor(Math.random() * 10000);
+    const newTask = { id, ...task };
 
     // const res = await fetch(BASEURL, {
     //   method: "POST",
@@ -61,9 +60,7 @@ function App() {
   const deleteDoneTasks = () => {
     const done = [];
     tasks.map((task) => {
-      if (task.completed) {
-        done.push(task.id);
-      }
+      done.push(task.completed && task.id);
     });
     console.log(done.toString());
     fetch(BASEURL + done.toString(), {
@@ -99,31 +96,29 @@ function App() {
   };
 
   return (
-    <Router>
-      <div className="container">
-        <AddTask addTask={addTask} />
-        <div className="tasks">
-          <div className="flex-container">
-            <div className="counter">
-              <h3>
-                {tasks.filter((task) => task.completed === true).length}/
-                {tasks.length}
-              </h3>
-            </div>
-            <div className="clearDone">
-              <button onClick={deleteDoneTasks} className="btn--clear">
-                clear done
-              </button>
-            </div>
+    <div className="container">
+      <AddTask addTask={addTask} />{" "}
+      <div className="tasks">
+        <div className="flex-container">
+          <div className="counter">
+            <h3>
+              {tasks.filter((task) => task.completed === true).length}/
+              {tasks.length}
+            </h3>
           </div>
-          {tasks.length > 0 ? (
-            <Tasks tasks={tasks} onDel={deleteTask} handleDone={handleDone} />
-          ) : (
-            "No Task To Show."
-          )}
+          <div className="clearDone">
+            <button onClick={deleteDoneTasks} className="btn--clear">
+              clear done
+            </button>
+          </div>
         </div>
+        {tasks.length > 0 ? (
+          <Tasks tasks={tasks} onDel={deleteTask} handleDone={handleDone} />
+        ) : (
+          "No Task To Show."
+        )}
       </div>
-    </Router>
+    </div>
   );
 }
 
