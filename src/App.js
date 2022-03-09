@@ -2,7 +2,7 @@ import Tasks from "./components/Tasks";
 import { useState, useEffect } from "react";
 import AddTask from "./components/AddTask";
 
-const BASEURL = "http://jsonplaceholder.typicode.com/todos/";
+const BASEURL = "http://localhost:3000/tasks/";
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -31,17 +31,12 @@ function App() {
   // Add task
   const addTask = async (task) => {
     console.log(task);
-
-    const id = Math.floor(Math.random() * 10000);
-    const newTask = { id, ...task };
-
-    // const res = await fetch(BASEURL, {
-    //   method: "POST",
-    //   headers: { "content-type": "application/json" },
-    //   body: JSON.stringify(task),
-    // });
-
-    // const newTask = await res.json();
+    const res = await fetch(BASEURL, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(task),
+    });
+    const newTask = await res.json();
     console.log("newTask", newTask);
     console.log("Tasks", [newTask, ...tasks]);
 
@@ -60,35 +55,37 @@ function App() {
   const deleteDoneTasks = () => {
     const done = [];
     tasks.map((task) => {
-      done.push(task.completed && task.id);
+      if (task.done) {
+        done.push(task.id);
+      }
     });
     console.log(done.toString());
-    fetch(BASEURL + done.toString(), {
-      method: "DELETE",
+    done.map((elmt) => {
+      fetch(BASEURL + elmt, {
+        method: "DELETE",
+      });
+      console.log("Deleted", elmt);
     });
     setTasks(tasks.filter((task) => !done.includes(task.id)));
-    console.log("Deleted");
   };
 
   // Done
   const handleDone = async (id) => {
-    const taskToToggle = tasks.filter((task) => task.id === id);
+    const taskToToggle = await fetchTask(id);
     const updatedTask = {
-      ...taskToToggle[0],
-      completed: !taskToToggle.completed,
+      ...taskToToggle,
+      done: !taskToToggle.done,
     };
-    // const res = await fetch(BASEURL + id, {
-    //   method: "PUT",
-    //   headers: { "content-type": "application/json" },
-    //   body: JSON.stringify(updatedTask),
-    // });
+    const res = await fetch(BASEURL + id, {
+      method: "PUT",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(updatedTask),
+    });
 
-    // const data = await res.json();
+    const data = await res.json();
     setTasks(
       tasks.map((task) =>
-        task.id === id
-          ? { ...task, completed: !taskToToggle[0].completed }
-          : task
+        task.id === id ? { ...task, done: data.done } : task
       )
     );
     console.log("new data: ", updatedTask);
@@ -102,8 +99,7 @@ function App() {
         <div className="flex-container">
           <div className="counter">
             <h3>
-              {tasks.filter((task) => task.completed === true).length}/
-              {tasks.length}
+              {tasks.filter((task) => task.done === true).length}/{tasks.length}
             </h3>
           </div>
           <div className="clearDone">

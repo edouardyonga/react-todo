@@ -21,7 +21,7 @@ const AddTask = ({ addTask }) => {
       alert("Please add a task");
       return;
     }
-    addTask({ title: text, completed: false });
+    addTask({ text, done: false });
     setText("");
     setValid(false);
   };
