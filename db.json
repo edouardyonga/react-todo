@@ -1,14 +1,13 @@
 {
-  "tasks": [
-    {
-      "text": "tomate",
-      "done": false,
-      "id": 1
-    },
-    {
-      "text": "patate",
-      "done": false,
-      "id": 5
-    }
-  ]
+    "tasks": [{
+            "text": "tomate",
+            "done": false,
+            "id": 1
+        },
+        {
+            "text": "patate",
+            "done": false,
+            "id": 5
+        }
+    ]
 }

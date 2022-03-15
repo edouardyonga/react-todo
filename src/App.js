@@ -32,16 +32,19 @@ function App() {
   // Add task
   const addTask = async (task) => {
     console.log(task);
+    const id = Math.floor(Math.random() * 1000);
+    const newTask = { id, ...task };
     const res = await fetch(BASEURL, {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify(task),
+      body: JSON.stringify(newTask),
     });
-    const newTask = await res.json();
-    console.log("newTask", newTask);
-    console.log("Tasks", [newTask, ...tasks]);
+    const newServerTask = await res.json();
 
-    setTasks([newTask, ...tasks]);
+    console.log("newTask", newTask);
+    console.log("Tasks", [newServerTask, ...tasks]);
+
+    setTasks([newServerTask, ...tasks]);
   };
 
   // Delete task
