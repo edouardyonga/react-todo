@@ -8,6 +8,16 @@
             "text": "patate",
             "done": false,
             "id": 5
+        },
+        {
+            "text": "gateau",
+            "done": false,
+            "id": 1
+        },
+        {
+            "text": "riz",
+            "done": false,
+            "id": 5
         }
     ]
 }
