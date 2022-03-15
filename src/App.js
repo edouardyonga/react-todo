@@ -75,21 +75,23 @@ function App() {
 
   // Done
   const handleDone = async (id) => {
-    const taskToToggle = await fetchTask(id);
-    const updatedTask = {
-      ...taskToToggle,
-      done: !taskToToggle.done,
-    };
-    const res = await fetch(BASEURL + id, {
-      method: "PUT",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(updatedTask),
-    });
+    // const taskToToggle = await fetchTask(id);
+    const taskToToggle = tasks.filter((task)=> task.id === id);
 
-    const data = await res.json();
+    const updatedTask = {
+      ...taskToToggle[0],
+      done: !taskToToggle[0].done,
+    };
+    // const res = await fetch(BASEURL + id, {
+    //   method: "PUT",
+    //   headers: { "content-type": "application/json" },
+    //   body: JSON.stringify(updatedTask),
+    // });
+
+    // const data = await res.json();
     setTasks(
       tasks.map((task) =>
-        task.id === id ? { ...task, done: data.done } : task
+        task.id == id ? { ...task, done: updatedTask.done } : task
       )
     );
     console.log("new data: ", updatedTask);
