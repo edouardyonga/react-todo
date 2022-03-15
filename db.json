@@ -12,12 +12,22 @@
         {
             "text": "gateau",
             "done": false,
-            "id": 1
+            "id": 6
         },
         {
             "text": "riz",
             "done": false,
-            "id": 5
+            "id": 7
+        },
+        {
+            "text": "Outing",
+            "done": false,
+            "id": 8
+        },
+        {
+            "text": "cook",
+            "done": false,
+            "id": 9
         }
     ]
 }
