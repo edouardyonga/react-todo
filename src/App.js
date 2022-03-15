@@ -2,7 +2,8 @@ import Tasks from "./components/Tasks";
 import { useState, useEffect } from "react";
 import AddTask from "./components/AddTask";
 
-const BASEURL = "http://localhost:3000/tasks/";
+const BASEURL =
+  "https://my-json-server.typicode.com/edouardyonga/react-todo/tasks/";
 
 function App() {
   const [tasks, setTasks] = useState([]);
