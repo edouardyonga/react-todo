@@ -1,5 +1,4 @@
-{
-  "tasks": [
+[
     {
       "text": "tomate",
       "done": false,
@@ -11,4 +10,3 @@
       "id": 5
     }
   ]
-}
