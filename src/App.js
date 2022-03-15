@@ -2,8 +2,9 @@ import Tasks from "./components/Tasks";
 import { useState, useEffect } from "react";
 import AddTask from "./components/AddTask";
 
-const BASEURL =
-  "https://my-json-server.typicode.com/edouardyonga/react-todo/tasks/";
+// const BASEURL =
+// "https://my-json-server.typicode.com/edouardyonga/react-todo/tasks/";
+const BASEURL = "https://api-nano-todo.herokuapp.com/tasks/";
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -75,23 +76,23 @@ function App() {
 
   // Done
   const handleDone = async (id) => {
-    // const taskToToggle = await fetchTask(id);
-    const taskToToggle = tasks.filter((task)=> task.id === id);
+    const taskToToggle = await fetchTask(id);
+    // const taskToToggle = tasks.filter((task) => task.id === id);
 
     const updatedTask = {
-      ...taskToToggle[0],
-      done: !taskToToggle[0].done,
+      ...taskToToggle,
+      done: !taskToToggle.done,
     };
-    // const res = await fetch(BASEURL + id, {
-    //   method: "PUT",
-    //   headers: { "content-type": "application/json" },
-    //   body: JSON.stringify(updatedTask),
-    // });
+    const res = await fetch(BASEURL + id, {
+      method: "PUT",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(updatedTask),
+    });
 
-    // const data = await res.json();
+    const data = await res.json();
     setTasks(
       tasks.map((task) =>
-        task.id == id ? { ...task, done: updatedTask.done } : task
+        task.id == id ? { ...task, done: data.done } : task
       )
     );
     console.log("new data: ", updatedTask);
